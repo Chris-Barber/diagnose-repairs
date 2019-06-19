@@ -3,40 +3,123 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>PITCH</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+    <nav class="navbar is-link">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="http://bulma.io/images/bulma-logo.png" alt="PITCH" width="112" height="28">
+            </a>
+            <div class="navbar-burger burger" data-target="navMenuExample3">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-    </div>
+        <div id="navMenuExample3" class="navbar-menu">
+            <div class="navbar-start">
+                @*<a class="navbar-item " href="/">
+                    Home
+                </a>*@
+            </div>
+            <div class="navbar-end">
+              
+            </div>
+        </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+        @*<footer class="footer">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3 is-offset-2">
+                        <h2>
+                            <strong>Category</strong>
+                        </h2>
+                        <ul>
+                            <li>
+                                <a href="#">Lorem ipsum dolor sit amet</a>
+                            </li>
+                            <li>
+                                <a href="#">Vestibulum errato isse</a>
+                            </li>
+                            <li>
+                                <a href="#">Lorem ipsum dolor sit amet</a>
+                            </li>
+                            <li>
+                                <a href="#">Aisia caisia</a>
+                            </li>
+                            <li>
+                                <a href="#">Murphy's law</a>
+                            </li>
+                            <li>
+                                <a href="#">Flimsy Lavenrock</a>
+                            </li>
+                            <li>
+                                <a href="#">Maven Mousie Lavender</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column is-3">
+                        <h2>
+                            <strong>Category</strong>
+                        </h2>
+                        <ul>
+                            <li>
+                                <a href="#">Labore et dolore magna aliqua</a>
+                            </li>
+                            <li>
+                                <a href="#">Kanban airis sum eschelor</a>
+                            </li>
+                            <li>
+                                <a href="#">Modular modern free</a>
+                            </li>
+                            <li>
+                                <a href="#">The king of clubs</a>
+                            </li>
+                            <li>
+                                <a href="#">The Discovery Dissipation</a>
+                            </li>
+                            <li>
+                                <a href="#">Course Correction</a>
+                            </li>
+                            <li>
+                                <a href="#">Better Angels</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column is-4">
+                        <h2>
+                            <strong>Category</strong>
+                        </h2>
+                        <ul>
+                            <li>
+                                <a href="#">Objects in space</a>
+                            </li>
+                            <li>
+                                <a href="#">Playing cards with coyote</a>
+                            </li>
+                            <li>
+                                <a href="#">Goodbye Yellow Brick Road</a>
+                            </li>
+                            <li>
+                                <a href="#">The Garden of Forking Paths</a>
+                            </li>
+                            <li>
+                                <a href="#">Future Shock</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>*@
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
