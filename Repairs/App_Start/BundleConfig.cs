@@ -23,7 +23,7 @@ namespace Repairs
             //          "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bulma.css"));
+                      "~/Content/bulma.css", "~/Content/Site.css"));
         }
     }
 }
