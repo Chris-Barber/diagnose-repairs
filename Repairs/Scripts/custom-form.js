@@ -31,9 +31,27 @@ var onAjaxRequestSuccess = function (result) {
         // Setting.  
         alert(result.ErrorMsg);
     } else if (result.EnableSuccess) {
-        // Setting.  
-        alert(result.SuccessMsg);
+        var formId = 'AjaxformId';
+        this.highlightSelectedFormElement(formId, result.Name, result.SelectedValue);
+        
         // Resetting form.  
-        $('#AjaxformId').get(0).reset();
+        $('#' + formId).get(0).reset();
     }
+};
+$('input[type=radio]').on('change', function () {
+    $(this).closest("form").submit();
+});
+
+function highlightSelectedFormElement(formId, name, selectedValue) {
+    $("#"+formId+" :input").each(function () {
+        var input = $(this);
+
+        if (input[0].name === name) {
+            if (input.val() === selectedValue) {
+                input.next().addClass("is-black");
+            } else {
+                input.closest('div').fadeOut();
+            }
+        }
+    });
 }

@@ -16,62 +16,42 @@
         <div class="card is-shady">
             <div class="card-content">
                 <div class="content">
-                    <section class="section">
-                        @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "AjaxformId", @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div class="well bs-component">
-                                <br />
-                                <div class="row">
-                                    <div class="col-md-12 col-md-push-2">
-                                        <div class="form-group">
-                                            <div class="col-md-10 col-md-pull-1">
-                                                @Html.TextBoxFor(m => m.Text, new { placeholder = Html.DisplayNameFor(m => m.Text), @class = "form-control" })
-                                                @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger custom-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-18">
-                                                <ul class="donate-now">
-                                                    <li>
-                                                        <input type="radio" id="a25" name="amount" />
-                                                        <label for="a25">$25</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" id="a50" name="amount" />
-                                                        <label for="a50">$50</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" id="a75" name="amount" checked="checked" />
-                                                        <label for="a75"><a class="button"> Button </a></label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" id="a100" name="amount" />
-                                                        <label for="a100">$100</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" id="other" name="amount" />
-                                                        <label for="other">other:</label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-4 col-md-push-2">
-                                                <div>
-                                                    <button type="submit"
-                                                            class="btn btn-warning"
-                                                            value="Process">
-                                                        <span class="ladda-label">Process</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div>Please complete</div>
+                        </div>
+
+                        <div class="column is-6">
+                            @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "AjaxformId", @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+
+                                    <div>
+                                        <label>
+                                            @Html.RadioButtonFor(m => m.SubCategory, "Agree")
+                                            <a class="button"> Agree </a>
+                                        </label>
                                     </div>
+                                    <div>
+                                        <label>
+                                            @Html.RadioButtonFor(m => m.SubCategory, "Disagree")
+                                            <a class="button"> Disagree </a>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            @Html.RadioButtonFor(m => m.SubCategory, "Not Sure")
+                                            <a class="button"> Not sure </a>
+                                        </label>
+                                    </div>
+                                    <div>@Html.ValidationMessageFor(m => m.SubCategory, "", new { @class = "text-danger custom-danger" })</div>
                                 </div>
-                            </div>
-                        }
-                    </section>
+                            }
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -90,3 +90,7 @@ footer li:before {
     margin-left: -1.5em;
     color: #147efb;
 }
+
+input[type="radio"] {
+    visibility: hidden;
+}

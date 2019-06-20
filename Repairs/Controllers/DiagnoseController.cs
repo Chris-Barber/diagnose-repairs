@@ -57,7 +57,9 @@ namespace Repairs.Controllers
                     {
                         EnableSuccess = true,
                         SuccessTitle = "Success",
-                        SuccessMsg = model.Text
+                        SuccessMsg = model.SubCategory,
+                        Name = "SubCategory",
+                        SelectedValue = model.SubCategory
                     });
                 }
             }

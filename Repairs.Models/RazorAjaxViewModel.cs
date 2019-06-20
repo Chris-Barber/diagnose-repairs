@@ -5,8 +5,8 @@
     public class RazorAjaxViewModel
     {
         [Required]
-        [Display(Name = "Text")]
-        public string Text
+        [Display(Name = "SubCategory")]
+        public string SubCategory
         {
             get;
             set;
