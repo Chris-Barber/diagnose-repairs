@@ -122,6 +122,11 @@
     </div>
 
 
-    @RenderSection("scripts", required: false)
+@*Scripts*@
+@Scripts.Render("~/bundles/jquery") 
+@Scripts.Render("~/bundles/jqueryval") 
+<!-- Custom Form -->
+@Scripts.Render("~/scripts/custom-form") 
+@RenderSection("scripts", required: false) 
 </body>
 </html>
