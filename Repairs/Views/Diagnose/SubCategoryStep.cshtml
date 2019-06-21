@@ -1,10 +1,28 @@
-﻿<hr />
+﻿@using Repairs.Models
+@model Repairs.ViewModels.SubCategoryViewModel
+<hr />
+
 <div class="columns">
     <div class="column is-6">
-        <div>hello</div>
+        <p>Question 2</p>
     </div>
 
     <div class="column is-6">
-        <div>goodbye</div>
+        @using (Ajax.BeginForm("SubCategoryStep", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "SubCategoryStepForm", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+
+                @foreach (var taskSubCategory in Model.SubCategories)
+                {
+                    <div>
+                        <label>
+                            <a class="button is-fullwidth"> @taskSubCategory.Title </a>
+                            @Html.RadioButtonFor(m => taskSubCategory.Title, taskSubCategory.Title)
+                        </label>
+                    </div>
+                }
+            </div>
+        }
     </div>
 </div>

@@ -9,69 +9,51 @@ namespace Repairs.Controllers
     using Moat.Api.Helpers;
 
     using Repairs.Models;
+    using Repairs.Models.Tasks;
     using Repairs.Service;
+    using Repairs.ViewModels;
 
     public class DiagnoseController : Controller
     {
-        //// GET: Diagnose
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        /// <summary>  
-        /// Get: /RazorAjax/Index method.  
-        /// </summary>  
-        /// <returns>Return index view</returns>  
         public ActionResult Index()
         {
             try
             {
-
                 IRepairTasksRepository repairTasksRepository = new RepairTaskRepository();
                 IJsonTasksService jsonTasksService = new JsonTasksService(repairTasksRepository);
                 var filtered = jsonTasksService.GetTaskCategoriesFiltered(
                     DirectoryHelper.MapPath("~/App_Data/jsonData.json"),
                     "P");
 
+                var vm = new CategoryViewModel() { Categories = filtered };
+                return this.View(vm);
             }
             catch (Exception ex)
             {
                 // Info  
                 Console.Write(ex);
             }
-            // Info.  
-            return this.View();
+
+            return this.HttpNotFound();
         }
 
-        /// <summary>  
-        /// POST: /RazorAjax/Index  
-        /// </summary>  
-        /// <param name="model">Model parameter</param>  
-        /// <returns>Return - RazorAjax content</returns>  
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(RazorAjaxViewModel model)
+        public ActionResult Index(TaskCategory category)
         {
             try
             {
                 // Verification  
                 if (ModelState.IsValid)
                 {
-
-
-
-
-
-
-                    // Info.  
                     return this.Json(new
                     {
                         EnableSuccess = true,
                         NextStepName = "SubCategoryStep",
-                        SelectedName = "Category",
-                        SelectedValue = model.Category
+                        SelectedName = "category.Title",
+                        SelectedValue = category.Title,
+                        FormId = "CategoryStepForm"
                     });
                 }
             }
@@ -91,7 +73,50 @@ namespace Repairs.Controllers
 
         public ActionResult SubCategoryStep(string selectedValue)
         {
-            return PartialView();
+            IRepairTasksRepository repairTasksRepository = new RepairTaskRepository();
+            IJsonTasksService jsonTasksService = new JsonTasksService(repairTasksRepository);
+            var filtered = jsonTasksService.GetTaskCategoriesFiltered(
+                DirectoryHelper.MapPath("~/App_Data/jsonData.json"),
+                "P");
+
+            var subCategories = filtered.First(x => x.Title == selectedValue).SubCategories;
+
+            var vm = new SubCategoryViewModel() { SubCategories = subCategories };
+
+            return PartialView(vm);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubCategoryStep(TaskSubCategory subCategory)
+        {
+            try
+            {
+                // Verification  
+                if (ModelState.IsValid)
+                {
+                    return this.Json(new
+                    {
+                        EnableSuccess = true,
+                        NextStepName = "SubCategoryStep",
+                        SelectedName = "Category",
+                        //SelectedValue = category.Title
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Info  
+                Console.Write(ex);
+            }
+            // Info  
+            return this.Json(new
+            {
+                EnableError = true,
+                ErrorTitle = "Error",
+                ErrorMsg = "Something goes wrong, please try again later"
+            });
         }
     }
 }

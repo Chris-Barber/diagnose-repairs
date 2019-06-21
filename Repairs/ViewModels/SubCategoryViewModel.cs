@@ -4,8 +4,8 @@
 
     using Repairs.Models.Tasks;
 
-    public class CategoryViewModel
+    public class SubCategoryViewModel
     {
-        public IList<TaskCategory> Categories { get; set; }
+        public IList<TaskSubCategory> SubCategories { get; set; }
     }
 }

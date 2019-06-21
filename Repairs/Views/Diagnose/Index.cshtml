@@ -1,5 +1,5 @@
 ﻿@using Repairs.Models
-@model Repairs.Models.RazorAjaxViewModel
+@model Repairs.ViewModels.CategoryViewModel
 @{
     ViewBag.Title = "Log a repair";
 }
@@ -16,46 +16,39 @@
         <div class="card is-shady">
             <div class="card-content">
 
-                    <div id="Category">
-                        <div class="columns">
-                            <div class="column is-6">
-                                <p>Question 1</p>
-                            </div>
+                <div id="CategoryStep">
+                    <div class="columns">
+                        <div class="column is-6">
+                            <p>Question 1</p>
+                        </div>
 
-                            <div class="column is-6">
-                                @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "AjaxformId", @class = "form-horizontal", role = "form" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div class="form-group">
+                        <div class="column is-6">
+                            @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "CategoryStepForm", @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
 
+                                    @foreach (var category in Model.Categories)
+                                    {
                                         <div>
                                             <label>
-                                                @Html.RadioButtonFor(m => m.Category, "Agree")
-                                                <a class="button form__button is-fullwidth"> Agree </a>
+                                                <a class="button is-fullwidth"> @category.Title </a>
+                                                @Html.RadioButtonFor(m => category.Title, category.Title)
                                             </label>
                                         </div>
-                                        <div>
-                                            <label>
-                                                @Html.RadioButtonFor(m => m.Category, "Disagree")
-                                                <a class="button form__button is-fullwidth"> Disagree </a>
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <label>
-                                                @Html.RadioButtonFor(m => m.Category, "Not Sure")
-                                                <a class="button form__button is-fullwidth"> Not sure </a>
-                                            </label>
-                                        </div>
-                                        <div>@Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger custom-danger" })</div>
-                                    </div>
-                                }
-                            </div>
+                                    }
+
+                                    @*<div>@Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger custom-danger" })</div>*@
+                                </div>
+                            }
                         </div>
                     </div>
-                    
+                </div>
 
-                    <div id="SubCategoryStep">                
-                    </div>
+
+                <div id="SubCategoryStep">
+
+                </div>
 
 
             </div>
