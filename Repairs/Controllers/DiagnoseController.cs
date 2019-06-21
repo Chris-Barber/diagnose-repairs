@@ -15,9 +15,7 @@ namespace Repairs.Controllers
         //{
         //    return View();
         //}
-
-        #region Index view method.
-        #region Get: /RazorAjax/Index  method.
+        
         /// <summary>  
         /// Get: /RazorAjax/Index method.  
         /// </summary>  
@@ -35,8 +33,7 @@ namespace Repairs.Controllers
             // Info.  
             return this.View();
         }
-        #endregion
-        #region POST: /RazorAjax/Index  
+        
         /// <summary>  
         /// POST: /RazorAjax/Index  
         /// </summary>  
@@ -56,10 +53,9 @@ namespace Repairs.Controllers
                     return this.Json(new
                     {
                         EnableSuccess = true,
-                        SuccessTitle = "Success",
-                        SuccessMsg = model.SubCategory,
-                        Name = "SubCategory",
-                        SelectedValue = model.SubCategory
+                        NextStepName = "SubCategoryStep",
+                        SelectedName = "Category",
+                        SelectedValue = model.Category
                     });
                 }
             }
@@ -76,7 +72,10 @@ namespace Repairs.Controllers
                 ErrorMsg = "Something goes wrong, please try again later"
             });
         }
-        #endregion
-        #endregion
+
+        public ActionResult SubCategoryStep(string selectedValue)
+        {
+            return PartialView();
+        }
     }
 }

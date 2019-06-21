@@ -15,44 +15,49 @@
 
         <div class="card is-shady">
             <div class="card-content">
-                <div class="content">
 
-                    <div class="columns">
-                        <div class="column is-6">
-                            <div>Please complete</div>
-                        </div>
+                    <div id="Category">
+                        <div class="columns">
+                            <div class="column is-6">
+                                <p>Question 1</p>
+                            </div>
 
-                        <div class="column is-6">
-                            @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "AjaxformId", @class = "form-horizontal", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <div class="form-group">
+                            <div class="column is-6">
+                                @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "AjaxformId", @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group">
 
-                                    <div>
-                                        <label>
-                                            @Html.RadioButtonFor(m => m.SubCategory, "Agree")
-                                            <a class="button"> Agree </a>
-                                        </label>
+                                        <div>
+                                            <label>
+                                                @Html.RadioButtonFor(m => m.Category, "Agree")
+                                                <a class="button form__button is-fullwidth"> Agree </a>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                @Html.RadioButtonFor(m => m.Category, "Disagree")
+                                                <a class="button form__button is-fullwidth"> Disagree </a>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                @Html.RadioButtonFor(m => m.Category, "Not Sure")
+                                                <a class="button form__button is-fullwidth"> Not sure </a>
+                                            </label>
+                                        </div>
+                                        <div>@Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger custom-danger" })</div>
                                     </div>
-                                    <div>
-                                        <label>
-                                            @Html.RadioButtonFor(m => m.SubCategory, "Disagree")
-                                            <a class="button"> Disagree </a>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            @Html.RadioButtonFor(m => m.SubCategory, "Not Sure")
-                                            <a class="button"> Not sure </a>
-                                        </label>
-                                    </div>
-                                    <div>@Html.ValidationMessageFor(m => m.SubCategory, "", new { @class = "text-danger custom-danger" })</div>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
                     </div>
+                    
 
-                </div>
+                    <div id="SubCategoryStep">                
+                    </div>
+
+
             </div>
         </div>
     </div>

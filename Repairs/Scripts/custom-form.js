@@ -26,24 +26,26 @@
         });
     }); //end .submit()  
 });
+
 var onAjaxRequestSuccess = function (result) {
     if (result.EnableError) {
         // Setting.  
         alert(result.ErrorMsg);
     } else if (result.EnableSuccess) {
         var formId = 'AjaxformId';
-        this.highlightSelectedFormElement(formId, result.Name, result.SelectedValue);
-        
+        this.highlightSelectedFormElement(formId, result.SelectedName, result.SelectedValue);
+        this.loadStep(result.NextStepName, result.SelectedValue);
         // Resetting form.  
         $('#' + formId).get(0).reset();
     }
 };
+
 $('input[type=radio]').on('change', function () {
     $(this).closest("form").submit();
 });
 
 function highlightSelectedFormElement(formId, name, selectedValue) {
-    $("#"+formId+" :input").each(function () {
+    $("#" + formId + " :input").each(function () {
         var input = $(this);
 
         if (input[0].name === name) {
@@ -54,4 +56,8 @@ function highlightSelectedFormElement(formId, name, selectedValue) {
             }
         }
     });
+}
+
+function loadStep(action, selectedValue) {
+    $("#" + action).load("/Diagnose/" + action, { selectedValue: selectedValue });
 }

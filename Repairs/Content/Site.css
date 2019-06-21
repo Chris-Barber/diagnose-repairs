@@ -94,3 +94,6 @@ footer li:before {
 input[type="radio"] {
     visibility: hidden;
 }
+.form__button {
+    margin-left: -1rem;
+}

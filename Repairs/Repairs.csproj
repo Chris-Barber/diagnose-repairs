@@ -170,6 +170,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Diagnose\Index.cshtml" />
+    <Content Include="Views\Diagnose\SubCategoryStep.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
