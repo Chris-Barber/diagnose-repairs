@@ -58,5 +58,10 @@ function highlightSelectedFormElement(formId, name, selectedValue) {
 }
 
 function loadStep(action, selectedValue) {
-    $("#" + action).load("/Diagnose/" + action, { selectedValue: selectedValue });
+    //$("#" + action).load("/Diagnose/" + action, { selectedValue: selectedValue });
+
+    var url = "/Diagnose/" + action;
+    $.get(url, { selectedValue: selectedValue }, function (data, status) {
+        $("#" + action).html(data);
+    });
 }
