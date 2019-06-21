@@ -6,7 +6,10 @@ using System.Web.Mvc;
 
 namespace Repairs.Controllers
 {
+    using Moat.Api.Helpers;
+
     using Repairs.Models;
+    using Repairs.Service;
 
     public class DiagnoseController : Controller
     {
@@ -15,7 +18,7 @@ namespace Repairs.Controllers
         //{
         //    return View();
         //}
-        
+
         /// <summary>  
         /// Get: /RazorAjax/Index method.  
         /// </summary>  
@@ -24,6 +27,13 @@ namespace Repairs.Controllers
         {
             try
             {
+
+                IRepairTasksRepository repairTasksRepository = new RepairTaskRepository();
+                IJsonTasksService jsonTasksService = new JsonTasksService(repairTasksRepository);
+                var filtered = jsonTasksService.GetTaskCategoriesFiltered(
+                    DirectoryHelper.MapPath("~/App_Data/jsonData.json"),
+                    "P");
+
             }
             catch (Exception ex)
             {
@@ -33,7 +43,7 @@ namespace Repairs.Controllers
             // Info.  
             return this.View();
         }
-        
+
         /// <summary>  
         /// POST: /RazorAjax/Index  
         /// </summary>  
@@ -49,6 +59,12 @@ namespace Repairs.Controllers
                 // Verification  
                 if (ModelState.IsValid)
                 {
+
+
+
+
+
+
                     // Info.  
                     return this.Json(new
                     {
