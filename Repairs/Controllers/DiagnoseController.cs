@@ -17,24 +17,10 @@ namespace Repairs.Controllers
     {
         public ActionResult Index()
         {
-            try
+            return this.View(new CategoryViewModel()
             {
-                IRepairTasksRepository repairTasksRepository = new RepairTaskRepository();
-                IJsonTasksService jsonTasksService = new JsonTasksService(repairTasksRepository);
-                var filtered = jsonTasksService.GetTaskCategoriesFiltered(
-                    DirectoryHelper.MapPath("~/App_Data/jsonData.json"),
-                    "P");
-
-                var vm = new CategoryViewModel() { Categories = filtered };
-                return this.View(vm);
-            }
-            catch (Exception ex)
-            {
-                // Info  
-                Console.Write(ex);
-            }
-
-            return this.HttpNotFound();
+                Categories = this.GetTasks()
+            });
         }
 
         [HttpPost]
@@ -42,81 +28,44 @@ namespace Repairs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(TaskCategory category)
         {
-            try
+            var subCategories = this.GetTasks()
+                .First(x => x.Title == category.Title)
+                .SubCategories;
+
+            return PartialView("SubCategoryStep", new SubCategoryViewModel()
             {
-                // Verification  
-                if (ModelState.IsValid)
-                {
-                    return this.Json(new
-                    {
-                        EnableSuccess = true,
-                        NextStepName = "SubCategoryStep",
-                        SelectedName = "category.Title",
-                        SelectedValue = category.Title,
-                        FormId = "CategoryStepForm"
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                // Info  
-                Console.Write(ex);
-            }
-            // Info  
-            return this.Json(new
-            {
-                EnableError = true,
-                ErrorTitle = "Error",
-                ErrorMsg = "Something goes wrong, please try again later"
+                SubCategories = subCategories,
+                TaskCategory = category.Title
             });
         }
-
-        public ActionResult SubCategoryStep(string selectedValue)
-        {
-            IRepairTasksRepository repairTasksRepository = new RepairTaskRepository();
-            IJsonTasksService jsonTasksService = new JsonTasksService(repairTasksRepository);
-            var filtered = jsonTasksService.GetTaskCategoriesFiltered(
-                DirectoryHelper.MapPath("~/App_Data/jsonData.json"),
-                "P");
-
-            var subCategories = filtered.First(x => x.Title == selectedValue).SubCategories;
-
-            var vm = new SubCategoryViewModel() { SubCategories = subCategories };
-
-            return PartialView(vm);
-        }
-
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult SubCategoryStep(TaskSubCategory subCategory)
+        public ActionResult SubCategoryStep(TaskSubCategory subCategory, string taskSubCategory)
         {
-            try
+            var subCategories = this.GetTasks()
+                .First(x => x.Title == taskSubCategory)
+                .SubCategories;
+
+            var tasks = subCategories
+                .First(x => x.Title == subCategory.Title)
+                .Tasks;
+
+            return PartialView("TaskStep", new TaskViewModel()
             {
-                // Verification  
-                if (ModelState.IsValid)
-                {
-                    return this.Json(new
-                    {
-                        EnableSuccess = true,
-                        NextStepName = "SubCategoryStep",
-                        SelectedName = "Category",
-                        //SelectedValue = category.Title
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                // Info  
-                Console.Write(ex);
-            }
-            // Info  
-            return this.Json(new
-            {
-                EnableError = true,
-                ErrorTitle = "Error",
-                ErrorMsg = "Something goes wrong, please try again later"
+                Tasks = tasks,
+                SubCategory = subCategory.Title
             });
+        }
+
+        private IList<TaskCategory> GetTasks()
+        {
+            var repairTasksRepository = new RepairTaskRepository();
+            var jsonTasksService = new JsonTasksService(repairTasksRepository);
+            return jsonTasksService.GetTaskCategoriesFiltered(
+                DirectoryHelper.MapPath("~/App_Data/jsonData.json"),
+                "P");
         }
     }
 }

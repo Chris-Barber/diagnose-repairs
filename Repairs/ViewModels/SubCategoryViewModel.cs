@@ -7,5 +7,7 @@
     public class SubCategoryViewModel
     {
         public IList<TaskSubCategory> SubCategories { get; set; }
+
+        public string TaskCategory { get; set; }
     }
 }

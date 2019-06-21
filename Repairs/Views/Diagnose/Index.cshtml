@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="column is-6">
-                            @using (Ajax.BeginForm("Index", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "CategoryStepForm", @class = "form-horizontal", role = "form" }))
+                            @using (Ajax.BeginForm("Index", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "SubCategoryStep", OnSuccess = "highlightSelectedFormElement('CategoryStep', data)" }, new { @id = "CategoryStepForm", @class = "form-horizontal", role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <div class="form-group">
@@ -45,11 +45,9 @@
                     </div>
                 </div>
 
+                <div id="SubCategoryStep"></div>
 
-                <div id="SubCategoryStep">
-
-                </div>
-
+                <div id="TaskStep"></div>
 
             </div>
         </div>

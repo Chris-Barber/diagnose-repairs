@@ -8,11 +8,11 @@
     </div>
 
     <div class="column is-6">
-        @using (Ajax.BeginForm("SubCategoryStep", "RazorAjax", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onAjaxRequestSuccess" }, new { @id = "SubCategoryStepForm", @class = "form-horizontal", role = "form" }))
+        @using (Ajax.BeginForm("SubCategoryStep", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "TaskStep", OnSuccess = "highlightSelectedFormElement('SubCategoryStep', data)" }, new { @id = "SubCategoryStepForm", @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
-
+                @Html.HiddenFor(x => Model.TaskCategory)
                 @foreach (var taskSubCategory in Model.SubCategories)
                 {
                     <div>
