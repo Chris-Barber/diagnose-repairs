@@ -12,6 +12,7 @@ namespace Repairs.Controllers
     using Repairs.Models.Tasks;
     using Repairs.Service;
     using Repairs.ViewModels;
+    using System.IO;
 
     public class DiagnoseController : Controller
     {
@@ -38,12 +39,12 @@ namespace Repairs.Controllers
                 TaskCategory = category.Title
             });
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult SubCategoryStep(
-            TaskSubCategory taskSubCategory, 
+            TaskSubCategory taskSubCategory,
             string taskCategory)
         {
             var subCategories = this.GetTasks()
@@ -66,8 +67,8 @@ namespace Repairs.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult TaskStep(
-            Task task, 
-            string taskSubCategory, 
+            Task task,
+            string taskSubCategory,
             string taskCategory)
         {
             var subCategories = this.GetTasks()
@@ -80,7 +81,7 @@ namespace Repairs.Controllers
 
             var selectedTask = tasks
                 .First(x => x.TaskDescription == task.TaskDescription);
-           
+
             return PartialView("ExtraQuestionsStep", new ExtraQuestionsViewModel()
             {
                 TaskCategory = taskCategory,
@@ -96,8 +97,16 @@ namespace Repairs.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ExtraQuestionsStep(ExtraQuestionsViewModel vm)
+        public ActionResult ExtraQuestionsStep(ExtraQuestionsViewModel vm, HttpPostedFileBase file)
         {
+            if (file != null)
+            {
+                IGeolocationService geo = new GeolocationService();
+                var location = geo.GetLocation(file.InputStream);
+                vm.Latitude = location.Latitude;
+                vm.Longitude = location.Longitude;
+            }
+
             return View("Summary", vm);
         }
 

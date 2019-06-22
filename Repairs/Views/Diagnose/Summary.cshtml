@@ -19,55 +19,72 @@
             <div class="card-content">
 
                 <div class="content">
-                    <div class="field">
-                        <label class="label">Task Category</label>
-                        <p class="control">
-                            @Model.TaskCategory
-                        </p>
-                    </div>
 
-                    <div class="field">
-                        <label class="label">Task Sub Category</label>
-                        <p class="control">
-                            @Model.TaskSubCategory
-                        </p>
-                    </div>
+                    <div class="columns">
 
-                    <div class="field">
-                        <label class="label">Task</label>
-                        <p class="control">
-                            @Model.Task
-                        </p>
-                    </div>
+                        <div class="column is-6">
 
-                    <div class="field">
-                        <label class="label">Task Code</label>
-                        <p class="control">
-                            @Model.TaskCode
-                        </p>
-                    </div>
 
-                    <div class="field">
-                        <label class="label">@Model.Question1</label>
-                        <p class="control">
-                            @Model.Answer1
-                        </p>
-                    </div>
+                            <div class="field">
+                                <label class="label">Task Category</label>
+                                <p class="control">
+                                    @Model.TaskCategory
+                                </p>
+                            </div>
 
-                    <div class="field">
-                        <label class="label">@Model.Question2</label>
-                        <p class="control">
-                            @Model.Answer2
-                        </p>
-                    </div>
+                            <div class="field">
+                                <label class="label">Task Sub Category</label>
+                                <p class="control">
+                                    @Model.TaskSubCategory
+                                </p>
+                            </div>
 
-                    <div class="field">
-                        <label class="label">@Model.Question3</label>
-                        <p class="control">
-                            @Model.Answer3
-                        </p>
-                    </div>
+                            <div class="field">
+                                <label class="label">Task</label>
+                                <p class="control">
+                                    @Model.Task
+                                </p>
+                            </div>
 
+                            <div class="field">
+                                <label class="label">Task Code</label>
+                                <p class="control">
+                                    @Model.TaskCode
+                                </p>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">@Model.Question1</label>
+                                <p class="control">
+                                    @Model.Answer1
+                                </p>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">@Model.Question2</label>
+                                <p class="control">
+                                    @Model.Answer2
+                                </p>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">@Model.Question3</label>
+                                <p class="control">
+                                    @Model.Answer3
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="column is-6">
+
+                            <iframe frameborder="0"
+                                    scrolling="no"
+                                    marginheight="0"
+                                    marginwidth="0"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBa_8jC62c8MZze9ngVNmwZCUna0NiKLv4&q=@Model.Latitude,@Model.Longitude&zoom=13"></iframe>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
