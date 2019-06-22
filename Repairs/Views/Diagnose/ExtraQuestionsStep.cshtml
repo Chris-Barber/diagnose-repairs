@@ -1,0 +1,44 @@
+﻿@using Repairs.Models
+@model Repairs.ViewModels.ExtraQuestionsViewModel
+<hr />
+
+<div class="columns">
+
+    <div class="column is-6">
+
+        @using (Html.BeginForm("ExtraQuestionsStep", "Diagnose", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => Model.TaskCategory)
+            @Html.HiddenFor(x => Model.TaskSubCategory)
+            @Html.HiddenFor(x => Model.Task)
+            @Html.HiddenFor(x => Model.TaskCode)
+            @Html.HiddenFor(x => Model.Question1)
+            @Html.HiddenFor(x => Model.Question2)
+            @Html.HiddenFor(x => Model.Question3)
+            <div class="field">
+                <label class="label">@Model.Question1</label>
+                <p class="control">
+                    @Html.TextAreaFor(x => x.Answer1, new { @class = "textarea", placeholder = "Maximum 500 words" })
+                </p>
+            </div>
+
+            <div class="field">
+                <label class="label">@Model.Question2</label>
+                <p class="control">
+                    @Html.TextAreaFor(x => x.Answer2, new { @class = "textarea", placeholder = "Maximum 500 words" })
+                </p>
+            </div>
+
+            <div class="field">
+                <label class="label">@Model.Question3</label>
+                <p class="control">
+                    @Html.TextAreaFor(x => x.Answer3, new { @class = "textarea", placeholder = "Maximum 500 words" })
+                </p>
+            </div>
+            
+            <a class="button is-rounded" href="javascript:$('form').submit();">Submit</a>
+        }
+    </div>
+
+</div>

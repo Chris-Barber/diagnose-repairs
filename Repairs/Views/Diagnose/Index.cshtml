@@ -9,21 +9,18 @@
 
         <section class="section">
             <h1 class="title">Report a repair</h1>
-            <p class="subtitle">Please give us some details of the repair you would like carried out.</p>
+            <p class="subtitle">What is your issue regarding?</p>
         </section>
 
 
         <div class="card is-shady">
             <div class="card-content">
 
-                <div id="CategoryStep">
+                <div id="CategoryStep" class="step">
                     <div class="columns">
+                        
                         <div class="column is-6">
-                            <p>Question 1</p>
-                        </div>
-
-                        <div class="column is-6">
-                            @using (Ajax.BeginForm("Index", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "SubCategoryStep", OnSuccess = "highlightSelectedFormElement('CategoryStep', data)" }, new { @id = "CategoryStepForm", @class = "form-horizontal", role = "form" }))
+                            @using (Ajax.BeginForm("Index", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "SubCategoryStep", OnSuccess = "highlightSelectedFormElement('CategoryStep', data, 'SubCategoryStepForm')" }, new { @id = "CategoryStepForm", @class = "form-horizontal", role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <div class="form-group">
@@ -32,23 +29,23 @@
                                     {
                                         <div>
                                             <label>
-                                                <a class="button is-fullwidth"> @category.Title </a>
+                                                <a class="button is-fullwidth tag__custom"> @category.Title </a>
                                                 @Html.RadioButtonFor(m => category.Title, category.Title)
                                             </label>
                                         </div>
                                     }
 
-                                    @*<div>@Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger custom-danger" })</div>*@
                                 </div>
                             }
                         </div>
                     </div>
                 </div>
 
-                <div id="SubCategoryStep"></div>
+                <div id="SubCategoryStep" class="step"></div>
 
-                <div id="TaskStep"></div>
+                <div id="TaskStep" class="step"></div>
 
+                <div id="ExtraQuestionsStep"></div>
             </div>
         </div>
     </div>

@@ -3,12 +3,9 @@
 <hr />
 
 <div class="columns">
+    
     <div class="column is-6">
-        <p>Question 2</p>
-    </div>
-
-    <div class="column is-6">
-        @using (Ajax.BeginForm("SubCategoryStep", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "TaskStep", OnSuccess = "highlightSelectedFormElement('SubCategoryStep', data)" }, new { @id = "SubCategoryStepForm", @class = "form-horizontal", role = "form" }))
+        @using (Ajax.BeginForm("SubCategoryStep", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "TaskStep", OnSuccess = "highlightSelectedFormElement('SubCategoryStep', data, 'TaskStepForm')" }, new { @id = "SubCategoryStepForm", @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
@@ -17,7 +14,7 @@
                 {
                     <div>
                         <label>
-                            <a class="button is-fullwidth"> @taskSubCategory.Title </a>
+                            <a class="button is-fullwidth tag__custom"> @taskSubCategory.Title </a>
                             @Html.RadioButtonFor(m => taskSubCategory.Title, taskSubCategory.Title)
                         </label>
                     </div>
@@ -25,4 +22,5 @@
             </div>
         }
     </div>
+
 </div>

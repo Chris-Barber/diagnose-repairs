@@ -3,26 +3,24 @@
 <hr />
 
 <div class="columns">
+    
     <div class="column is-6">
-        <p>Question 2</p>
-    </div>
-
-    <div class="column is-6">
-        @using (Ajax.BeginForm("TaskStep", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "sssssss", OnSuccess = "highlightSelectedFormElement('TaskStep', data)" }, new { @id = "TaskStepForm", @class = "form-horizontal", role = "form" }))
+        @using (Ajax.BeginForm("TaskStep", "Diagnose", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ExtraQuestionsStep", OnSuccess = "highlightSelectedFormElement('TaskStep', data)" }, new { @id = "TaskStepForm", @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <div class="form-group">
-                @Html.HiddenFor(x => Model.SubCategory)
-                @foreach (var task in Model.Tasks)
-                {
-                    <div>
-                        <label>
-                            <a class="button is-fullwidth"> @task.TaskDescription </a>
-                            @Html.RadioButtonFor(m => task.TaskCode, task.TaskCode)
-                        </label>
-                    </div>
-                }
-            </div>
+        <div class="form-group">
+            @Html.HiddenFor(x => Model.TaskCategory)
+            @Html.HiddenFor(x => Model.TaskSubCategory)
+            @foreach (var task in Model.Tasks)
+            {
+                <div>
+                    <label>
+                        <a class="button is-fullwidth tag__custom"> @task.TaskDescription </a>
+                        @Html.RadioButtonFor(m => task.TaskDescription, task.TaskDescription)
+                    </label>
+                </div>
+            }
+        </div>
         }
     </div>
 </div>

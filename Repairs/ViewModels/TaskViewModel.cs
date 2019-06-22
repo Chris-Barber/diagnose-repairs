@@ -10,6 +10,8 @@ namespace Repairs.ViewModels
     {
         public IList<Task> Tasks { get; set; }
 
-        public string SubCategory { get; set; }
+        public string TaskCategory { get; set; }
+
+        public string TaskSubCategory { get; set; }
     }
 }

@@ -42,21 +42,63 @@ namespace Repairs.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult SubCategoryStep(TaskSubCategory subCategory, string taskSubCategory)
+        public ActionResult SubCategoryStep(
+            TaskSubCategory taskSubCategory, 
+            string taskCategory)
         {
             var subCategories = this.GetTasks()
-                .First(x => x.Title == taskSubCategory)
+                .First(x => x.Title == taskCategory)
                 .SubCategories;
 
             var tasks = subCategories
-                .First(x => x.Title == subCategory.Title)
+                .First(x => x.Title == taskSubCategory.Title)
                 .Tasks;
 
             return PartialView("TaskStep", new TaskViewModel()
             {
                 Tasks = tasks,
-                SubCategory = subCategory.Title
+                TaskCategory = taskCategory,
+                TaskSubCategory = taskSubCategory.Title
             });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult TaskStep(
+            Task task, 
+            string taskSubCategory, 
+            string taskCategory)
+        {
+            var subCategories = this.GetTasks()
+                .First(x => x.Title == taskCategory)
+                .SubCategories;
+
+            var tasks = subCategories
+                .First(x => x.Title == taskSubCategory)
+                .Tasks;
+
+            var selectedTask = tasks
+                .First(x => x.TaskDescription == task.TaskDescription);
+           
+            return PartialView("ExtraQuestionsStep", new ExtraQuestionsViewModel()
+            {
+                TaskCategory = taskCategory,
+                TaskSubCategory = taskSubCategory,
+                Task = selectedTask.TaskDescription,
+                TaskCode = selectedTask.TaskCode,
+                Question1 = "Please give details on the location (e.g. which floor, which door, room)",
+                Question2 = "Extra question 2 that is specific to the task in question",
+                Question3 = "Extra question 3 asked to get more detail"
+            });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExtraQuestionsStep(ExtraQuestionsViewModel vm)
+        {
+            return View("Summary", vm);
         }
 
         private IList<TaskCategory> GetTasks()

@@ -94,3 +94,12 @@ footer li:before {
 input[type="radio"] {
     visibility: hidden;
 }
+
+.tag__custom {
+    height: auto !important;
+    white-space: unset !important;
+}
+
+.step{
+    margin-bottom: -2.5rem;
+}
