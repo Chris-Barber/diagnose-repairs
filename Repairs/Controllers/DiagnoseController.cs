@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,12 +6,9 @@ using System.Web.Mvc;
 namespace Repairs.Controllers
 {
     using Moat.Api.Helpers;
-
-    using Repairs.Models;
     using Repairs.Models.Tasks;
     using Repairs.Service;
     using Repairs.ViewModels;
-    using System.IO;
 
     public class DiagnoseController : Controller
     {
